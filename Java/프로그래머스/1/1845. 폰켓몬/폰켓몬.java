@@ -1,21 +1,11 @@
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     public int solution(int[] nums) {
-        int N = nums.length;
-        HashMap<Integer, Integer> hashmap = new HashMap<>();
-        for(int i = 0; i < N; i++){
-            if(hashmap.containsKey(nums[i])) {
-                hashmap.put(nums[i], hashmap.get(nums[i]) + 1);
-            } else {
-                hashmap.put(nums[i], 1);
-            }
-        }
-        int size = hashmap.size();
-        if ( N/2 >= size){
-            return size;
-        } else {
-            return N/2;
-        }
+        HashSet<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toCollection(HashSet::new));
+        int n = nums.length;
+        int k = n / 2;
+        return Math.min(k, set.size());
     }
 }
